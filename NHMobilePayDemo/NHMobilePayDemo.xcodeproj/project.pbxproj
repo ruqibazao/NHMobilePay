@@ -7,23 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0AC388061E71316F000F1669 /* NHOrderManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AC388051E71316F000F1669 /* NHOrderManage.m */; };
+		0A4B24F91E72F1CD004F360D /* NHAliPay.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4B24ED1E72F1CD004F360D /* NHAliPay.m */; };
+		0A4B24FA1E72F1CD004F360D /* NHIAP.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4B24EF1E72F1CD004F360D /* NHIAP.m */; };
+		0A4B24FB1E72F1CD004F360D /* NHOrderManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4B24F11E72F1CD004F360D /* NHOrderManage.m */; };
+		0A4B24FC1E72F1CD004F360D /* NHPayApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4B24F31E72F1CD004F360D /* NHPayApi.m */; };
+		0A4B24FD1E72F1CD004F360D /* NHPayHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4B24F51E72F1CD004F360D /* NHPayHelper.m */; };
+		0A4B24FE1E72F1CD004F360D /* NHWechatPay.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4B24F81E72F1CD004F360D /* NHWechatPay.m */; };
 		0AF11AC51E6D688F0099B958 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF11AC41E6D688F0099B958 /* main.m */; };
 		0AF11AC81E6D688F0099B958 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF11AC71E6D688F0099B958 /* AppDelegate.m */; };
 		0AF11ACB1E6D688F0099B958 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF11ACA1E6D688F0099B958 /* ViewController.m */; };
 		0AF11ACE1E6D688F0099B958 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AF11ACC1E6D688F0099B958 /* Main.storyboard */; };
 		0AF11AD01E6D688F0099B958 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AF11ACF1E6D688F0099B958 /* Assets.xcassets */; };
 		0AF11AD31E6D688F0099B958 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AF11AD11E6D688F0099B958 /* LaunchScreen.storyboard */; };
-		0AF11ADD1E6D68C50099B958 /* NHIAP.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF11ADC1E6D68C50099B958 /* NHIAP.m */; };
-		0AF11AE01E6D68D40099B958 /* NHWechatPay.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF11ADF1E6D68D40099B958 /* NHWechatPay.m */; };
-		0AF11AE31E6D68DF0099B958 /* NHAliPay.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF11AE21E6D68DF0099B958 /* NHAliPay.m */; };
-		0AF11AF01E6D69430099B958 /* NHPayHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF11AEF1E6D69430099B958 /* NHPayHelper.m */; };
-		0AF11AF41E6D6FA50099B958 /* NHPayApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF11AF31E6D6FA50099B958 /* NHPayApi.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0AC388041E71316F000F1669 /* NHOrderManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHOrderManage.h; sourceTree = "<group>"; };
-		0AC388051E71316F000F1669 /* NHOrderManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHOrderManage.m; sourceTree = "<group>"; };
+		0A4B24EC1E72F1CD004F360D /* NHAliPay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHAliPay.h; sourceTree = "<group>"; };
+		0A4B24ED1E72F1CD004F360D /* NHAliPay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHAliPay.m; sourceTree = "<group>"; };
+		0A4B24EE1E72F1CD004F360D /* NHIAP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHIAP.h; sourceTree = "<group>"; };
+		0A4B24EF1E72F1CD004F360D /* NHIAP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHIAP.m; sourceTree = "<group>"; };
+		0A4B24F01E72F1CD004F360D /* NHOrderManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHOrderManage.h; sourceTree = "<group>"; };
+		0A4B24F11E72F1CD004F360D /* NHOrderManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHOrderManage.m; sourceTree = "<group>"; };
+		0A4B24F21E72F1CD004F360D /* NHPayApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHPayApi.h; sourceTree = "<group>"; };
+		0A4B24F31E72F1CD004F360D /* NHPayApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHPayApi.m; sourceTree = "<group>"; };
+		0A4B24F41E72F1CD004F360D /* NHPayHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHPayHelper.h; sourceTree = "<group>"; };
+		0A4B24F51E72F1CD004F360D /* NHPayHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHPayHelper.m; sourceTree = "<group>"; };
+		0A4B24F61E72F1CD004F360D /* NHSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHSingleton.h; sourceTree = "<group>"; };
+		0A4B24F71E72F1CD004F360D /* NHWechatPay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHWechatPay.h; sourceTree = "<group>"; };
+		0A4B24F81E72F1CD004F360D /* NHWechatPay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHWechatPay.m; sourceTree = "<group>"; };
 		0AF11AC01E6D688F0099B958 /* NHMobilePayDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NHMobilePayDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AF11AC41E6D688F0099B958 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0AF11AC61E6D688F0099B958 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -34,17 +45,6 @@
 		0AF11ACF1E6D688F0099B958 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0AF11AD21E6D688F0099B958 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0AF11AD41E6D688F0099B958 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0AF11ADB1E6D68C50099B958 /* NHIAP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHIAP.h; sourceTree = "<group>"; };
-		0AF11ADC1E6D68C50099B958 /* NHIAP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHIAP.m; sourceTree = "<group>"; };
-		0AF11ADE1E6D68D40099B958 /* NHWechatPay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHWechatPay.h; sourceTree = "<group>"; };
-		0AF11ADF1E6D68D40099B958 /* NHWechatPay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHWechatPay.m; sourceTree = "<group>"; };
-		0AF11AE11E6D68DF0099B958 /* NHAliPay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHAliPay.h; sourceTree = "<group>"; };
-		0AF11AE21E6D68DF0099B958 /* NHAliPay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHAliPay.m; sourceTree = "<group>"; };
-		0AF11AEE1E6D69430099B958 /* NHPayHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHPayHelper.h; sourceTree = "<group>"; };
-		0AF11AEF1E6D69430099B958 /* NHPayHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHPayHelper.m; sourceTree = "<group>"; };
-		0AF11AF11E6D6A810099B958 /* NHSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHSingleton.h; sourceTree = "<group>"; };
-		0AF11AF21E6D6FA50099B958 /* NHPayApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHPayApi.h; sourceTree = "<group>"; };
-		0AF11AF31E6D6FA50099B958 /* NHPayApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHPayApi.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,10 +58,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A4B24EB1E72F1CD004F360D /* NHMobilePay */ = {
+			isa = PBXGroup;
+			children = (
+				0A4B24EC1E72F1CD004F360D /* NHAliPay.h */,
+				0A4B24ED1E72F1CD004F360D /* NHAliPay.m */,
+				0A4B24EE1E72F1CD004F360D /* NHIAP.h */,
+				0A4B24EF1E72F1CD004F360D /* NHIAP.m */,
+				0A4B24F01E72F1CD004F360D /* NHOrderManage.h */,
+				0A4B24F11E72F1CD004F360D /* NHOrderManage.m */,
+				0A4B24F21E72F1CD004F360D /* NHPayApi.h */,
+				0A4B24F31E72F1CD004F360D /* NHPayApi.m */,
+				0A4B24F41E72F1CD004F360D /* NHPayHelper.h */,
+				0A4B24F51E72F1CD004F360D /* NHPayHelper.m */,
+				0A4B24F61E72F1CD004F360D /* NHSingleton.h */,
+				0A4B24F71E72F1CD004F360D /* NHWechatPay.h */,
+				0A4B24F81E72F1CD004F360D /* NHWechatPay.m */,
+			);
+			name = NHMobilePay;
+			path = ../NHMobilePay;
+			sourceTree = "<group>";
+		};
 		0AF11AB71E6D688F0099B958 = {
 			isa = PBXGroup;
 			children = (
-				0AF11ADA1E6D68AF0099B958 /* NHMobilePay */,
+				0A4B24EB1E72F1CD004F360D /* NHMobilePay */,
 				0AF11AC21E6D688F0099B958 /* NHMobilePayDemo */,
 				0AF11AC11E6D688F0099B958 /* Products */,
 			);
@@ -97,26 +118,6 @@
 				0AF11AC41E6D688F0099B958 /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		0AF11ADA1E6D68AF0099B958 /* NHMobilePay */ = {
-			isa = PBXGroup;
-			children = (
-				0AF11AEE1E6D69430099B958 /* NHPayHelper.h */,
-				0AF11AEF1E6D69430099B958 /* NHPayHelper.m */,
-				0AF11ADB1E6D68C50099B958 /* NHIAP.h */,
-				0AF11ADC1E6D68C50099B958 /* NHIAP.m */,
-				0AC388041E71316F000F1669 /* NHOrderManage.h */,
-				0AC388051E71316F000F1669 /* NHOrderManage.m */,
-				0AF11ADE1E6D68D40099B958 /* NHWechatPay.h */,
-				0AF11ADF1E6D68D40099B958 /* NHWechatPay.m */,
-				0AF11AE11E6D68DF0099B958 /* NHAliPay.h */,
-				0AF11AE21E6D68DF0099B958 /* NHAliPay.m */,
-				0AF11AF21E6D6FA50099B958 /* NHPayApi.h */,
-				0AF11AF31E6D6FA50099B958 /* NHPayApi.m */,
-				0AF11AF11E6D6A810099B958 /* NHSingleton.h */,
-			);
-			path = NHMobilePay;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,14 +193,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AF11ACB1E6D688F0099B958 /* ViewController.m in Sources */,
+				0A4B24F91E72F1CD004F360D /* NHAliPay.m in Sources */,
+				0A4B24FC1E72F1CD004F360D /* NHPayApi.m in Sources */,
+				0A4B24FA1E72F1CD004F360D /* NHIAP.m in Sources */,
 				0AF11AC81E6D688F0099B958 /* AppDelegate.m in Sources */,
-				0AC388061E71316F000F1669 /* NHOrderManage.m in Sources */,
-				0AF11AF41E6D6FA50099B958 /* NHPayApi.m in Sources */,
-				0AF11ADD1E6D68C50099B958 /* NHIAP.m in Sources */,
+				0A4B24FD1E72F1CD004F360D /* NHPayHelper.m in Sources */,
+				0A4B24FB1E72F1CD004F360D /* NHOrderManage.m in Sources */,
+				0A4B24FE1E72F1CD004F360D /* NHWechatPay.m in Sources */,
 				0AF11AC51E6D688F0099B958 /* main.m in Sources */,
-				0AF11AE01E6D68D40099B958 /* NHWechatPay.m in Sources */,
-				0AF11AF01E6D69430099B958 /* NHPayHelper.m in Sources */,
-				0AF11AE31E6D68DF0099B958 /* NHAliPay.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,7 +322,7 @@
 				INFOPLIST_FILE = NHMobilePayDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cnlive.mijialiveshow;
+				PRODUCT_BUNDLE_IDENTIFIER = com.neghao.paydemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -334,7 +335,7 @@
 				INFOPLIST_FILE = NHMobilePayDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cnlive.mijialiveshow;
+				PRODUCT_BUNDLE_IDENTIFIER = com.neghao.paydemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
