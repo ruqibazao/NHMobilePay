@@ -1,0 +1,366 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0AC388061E71316F000F1669 /* NHOrderManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AC388051E71316F000F1669 /* NHOrderManage.m */; };
+		0AF11AC51E6D688F0099B958 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF11AC41E6D688F0099B958 /* main.m */; };
+		0AF11AC81E6D688F0099B958 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF11AC71E6D688F0099B958 /* AppDelegate.m */; };
+		0AF11ACB1E6D688F0099B958 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF11ACA1E6D688F0099B958 /* ViewController.m */; };
+		0AF11ACE1E6D688F0099B958 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AF11ACC1E6D688F0099B958 /* Main.storyboard */; };
+		0AF11AD01E6D688F0099B958 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AF11ACF1E6D688F0099B958 /* Assets.xcassets */; };
+		0AF11AD31E6D688F0099B958 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AF11AD11E6D688F0099B958 /* LaunchScreen.storyboard */; };
+		0AF11ADD1E6D68C50099B958 /* NHIAP.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF11ADC1E6D68C50099B958 /* NHIAP.m */; };
+		0AF11AE01E6D68D40099B958 /* NHWechatPay.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF11ADF1E6D68D40099B958 /* NHWechatPay.m */; };
+		0AF11AE31E6D68DF0099B958 /* NHAliPay.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF11AE21E6D68DF0099B958 /* NHAliPay.m */; };
+		0AF11AF01E6D69430099B958 /* NHPayHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF11AEF1E6D69430099B958 /* NHPayHelper.m */; };
+		0AF11AF41E6D6FA50099B958 /* NHPayApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF11AF31E6D6FA50099B958 /* NHPayApi.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0AC388041E71316F000F1669 /* NHOrderManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHOrderManage.h; sourceTree = "<group>"; };
+		0AC388051E71316F000F1669 /* NHOrderManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHOrderManage.m; sourceTree = "<group>"; };
+		0AF11AC01E6D688F0099B958 /* NHMobilePayDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NHMobilePayDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0AF11AC41E6D688F0099B958 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0AF11AC61E6D688F0099B958 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		0AF11AC71E6D688F0099B958 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		0AF11AC91E6D688F0099B958 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		0AF11ACA1E6D688F0099B958 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		0AF11ACD1E6D688F0099B958 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0AF11ACF1E6D688F0099B958 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0AF11AD21E6D688F0099B958 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0AF11AD41E6D688F0099B958 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0AF11ADB1E6D68C50099B958 /* NHIAP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHIAP.h; sourceTree = "<group>"; };
+		0AF11ADC1E6D68C50099B958 /* NHIAP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHIAP.m; sourceTree = "<group>"; };
+		0AF11ADE1E6D68D40099B958 /* NHWechatPay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHWechatPay.h; sourceTree = "<group>"; };
+		0AF11ADF1E6D68D40099B958 /* NHWechatPay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHWechatPay.m; sourceTree = "<group>"; };
+		0AF11AE11E6D68DF0099B958 /* NHAliPay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHAliPay.h; sourceTree = "<group>"; };
+		0AF11AE21E6D68DF0099B958 /* NHAliPay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHAliPay.m; sourceTree = "<group>"; };
+		0AF11AEE1E6D69430099B958 /* NHPayHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHPayHelper.h; sourceTree = "<group>"; };
+		0AF11AEF1E6D69430099B958 /* NHPayHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHPayHelper.m; sourceTree = "<group>"; };
+		0AF11AF11E6D6A810099B958 /* NHSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHSingleton.h; sourceTree = "<group>"; };
+		0AF11AF21E6D6FA50099B958 /* NHPayApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHPayApi.h; sourceTree = "<group>"; };
+		0AF11AF31E6D6FA50099B958 /* NHPayApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHPayApi.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0AF11ABD1E6D688F0099B958 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0AF11AB71E6D688F0099B958 = {
+			isa = PBXGroup;
+			children = (
+				0AF11ADA1E6D68AF0099B958 /* NHMobilePay */,
+				0AF11AC21E6D688F0099B958 /* NHMobilePayDemo */,
+				0AF11AC11E6D688F0099B958 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0AF11AC11E6D688F0099B958 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0AF11AC01E6D688F0099B958 /* NHMobilePayDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0AF11AC21E6D688F0099B958 /* NHMobilePayDemo */ = {
+			isa = PBXGroup;
+			children = (
+				0AF11AC61E6D688F0099B958 /* AppDelegate.h */,
+				0AF11AC71E6D688F0099B958 /* AppDelegate.m */,
+				0AF11AC91E6D688F0099B958 /* ViewController.h */,
+				0AF11ACA1E6D688F0099B958 /* ViewController.m */,
+				0AF11ACC1E6D688F0099B958 /* Main.storyboard */,
+				0AF11ACF1E6D688F0099B958 /* Assets.xcassets */,
+				0AF11AD11E6D688F0099B958 /* LaunchScreen.storyboard */,
+				0AF11AD41E6D688F0099B958 /* Info.plist */,
+				0AF11AC31E6D688F0099B958 /* Supporting Files */,
+			);
+			path = NHMobilePayDemo;
+			sourceTree = "<group>";
+		};
+		0AF11AC31E6D688F0099B958 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0AF11AC41E6D688F0099B958 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0AF11ADA1E6D68AF0099B958 /* NHMobilePay */ = {
+			isa = PBXGroup;
+			children = (
+				0AF11AEE1E6D69430099B958 /* NHPayHelper.h */,
+				0AF11AEF1E6D69430099B958 /* NHPayHelper.m */,
+				0AF11ADB1E6D68C50099B958 /* NHIAP.h */,
+				0AF11ADC1E6D68C50099B958 /* NHIAP.m */,
+				0AC388041E71316F000F1669 /* NHOrderManage.h */,
+				0AC388051E71316F000F1669 /* NHOrderManage.m */,
+				0AF11ADE1E6D68D40099B958 /* NHWechatPay.h */,
+				0AF11ADF1E6D68D40099B958 /* NHWechatPay.m */,
+				0AF11AE11E6D68DF0099B958 /* NHAliPay.h */,
+				0AF11AE21E6D68DF0099B958 /* NHAliPay.m */,
+				0AF11AF21E6D6FA50099B958 /* NHPayApi.h */,
+				0AF11AF31E6D6FA50099B958 /* NHPayApi.m */,
+				0AF11AF11E6D6A810099B958 /* NHSingleton.h */,
+			);
+			path = NHMobilePay;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0AF11ABF1E6D688F0099B958 /* NHMobilePayDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0AF11AD71E6D688F0099B958 /* Build configuration list for PBXNativeTarget "NHMobilePayDemo" */;
+			buildPhases = (
+				0AF11ABC1E6D688F0099B958 /* Sources */,
+				0AF11ABD1E6D688F0099B958 /* Frameworks */,
+				0AF11ABE1E6D688F0099B958 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NHMobilePayDemo;
+			productName = NHMobilePayDemo;
+			productReference = 0AF11AC01E6D688F0099B958 /* NHMobilePayDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0AF11AB81E6D688F0099B958 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = NegHao.Studio;
+				TargetAttributes = {
+					0AF11ABF1E6D688F0099B958 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 69U78V53ZN;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 0AF11ABB1E6D688F0099B958 /* Build configuration list for PBXProject "NHMobilePayDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0AF11AB71E6D688F0099B958;
+			productRefGroup = 0AF11AC11E6D688F0099B958 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0AF11ABF1E6D688F0099B958 /* NHMobilePayDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0AF11ABE1E6D688F0099B958 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0AF11AD31E6D688F0099B958 /* LaunchScreen.storyboard in Resources */,
+				0AF11AD01E6D688F0099B958 /* Assets.xcassets in Resources */,
+				0AF11ACE1E6D688F0099B958 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0AF11ABC1E6D688F0099B958 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0AF11ACB1E6D688F0099B958 /* ViewController.m in Sources */,
+				0AF11AC81E6D688F0099B958 /* AppDelegate.m in Sources */,
+				0AC388061E71316F000F1669 /* NHOrderManage.m in Sources */,
+				0AF11AF41E6D6FA50099B958 /* NHPayApi.m in Sources */,
+				0AF11ADD1E6D68C50099B958 /* NHIAP.m in Sources */,
+				0AF11AC51E6D688F0099B958 /* main.m in Sources */,
+				0AF11AE01E6D68D40099B958 /* NHWechatPay.m in Sources */,
+				0AF11AF01E6D69430099B958 /* NHPayHelper.m in Sources */,
+				0AF11AE31E6D68DF0099B958 /* NHAliPay.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		0AF11ACC1E6D688F0099B958 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0AF11ACD1E6D688F0099B958 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		0AF11AD11E6D688F0099B958 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0AF11AD21E6D688F0099B958 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0AF11AD51E6D688F0099B958 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		0AF11AD61E6D688F0099B958 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0AF11AD81E6D688F0099B958 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 69U78V53ZN;
+				INFOPLIST_FILE = NHMobilePayDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cnlive.mijialiveshow;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		0AF11AD91E6D688F0099B958 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 69U78V53ZN;
+				INFOPLIST_FILE = NHMobilePayDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cnlive.mijialiveshow;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0AF11ABB1E6D688F0099B958 /* Build configuration list for PBXProject "NHMobilePayDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0AF11AD51E6D688F0099B958 /* Debug */,
+				0AF11AD61E6D688F0099B958 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0AF11AD71E6D688F0099B958 /* Build configuration list for PBXNativeTarget "NHMobilePayDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0AF11AD81E6D688F0099B958 /* Debug */,
+				0AF11AD91E6D688F0099B958 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0AF11AB81E6D688F0099B958 /* Project object */;
+}
