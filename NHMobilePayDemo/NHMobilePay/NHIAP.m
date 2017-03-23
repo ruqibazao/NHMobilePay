@@ -264,9 +264,9 @@ NSSingletonM(NHIAP)
     NSLog(@"\n\n订单号：%@",payTransaction.transactionIdentifier);
 
     //从沙盒中获取交易凭证并且拼接成请求体数据
-    NSURL *receiptUrl = [[NSBundle mainBundle] appStoreReceiptURL];
-    NSData *receiptData = [NSData dataWithContentsOfURL:receiptUrl]; // Sent to the server by the device
-    _receiptDataStr = [receiptData base64EncodedStringWithOptions:0];
+    NSURL *receiptUrl   = [[NSBundle mainBundle] appStoreReceiptURL];
+    NSData *receiptData = [NSData dataWithContentsOfURL:receiptUrl];// Sent to the server by the device
+    _receiptDataStr     = [receiptData base64EncodedStringWithOptions:0];
 
     if (receiptData.length == 0) {
         /* ... Handle error ... */
@@ -285,13 +285,13 @@ NSSingletonM(NHIAP)
         if (error) {/* ... Handle error ... */
             tipWithMessage(error.localizedDescription);
         }else{
-            static NSString  *statusKey = @"status";
+            static NSString  *statusKey  = @"status";
             static NSInteger successCode = 0;
             static NSInteger sandboxCode = 21007;
-            static NSString  *sandbox = @"Sandbox";
+            static NSString  *sandbox    = @"Sandbox";
             static int isTextEnvironment = 1;
             NSString  *environment = [NSString stringWithFormat:@"%@",[resultObject objectForKey:@"environment"]];
-            NSInteger statusCode = [resultObject[statusKey] integerValue];
+            NSInteger statusCode   = [resultObject[statusKey] integerValue];
             
             if (!resultObject || error) {/* ... Handle error ...*/
                 tipWithMessage(@"充值失败！");
@@ -328,14 +328,10 @@ NSSingletonM(NHIAP)
     }];
 }
 
-//通知自己的服务验证
+//通知自己的服务验证,app内验证成功才通知
 - (void)verifyPurchaseInServe:(NSString *)receiptData error:(NSError *)error {
-
     if (self.transactionSuccessBlock) {
         self.transactionSuccessBlock(_paymentTransaction);
-    }
-    if (self.transactionFailureBlock) {
-        self.transactionFailureBlock(_paymentTransaction, error);
     }
 }
 

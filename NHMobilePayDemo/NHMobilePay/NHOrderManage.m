@@ -189,7 +189,7 @@ static NSString * getMD5String(NSString *str) {
     NSInteger hour = [comps hour];
     NSInteger min = [comps minute];
     NSInteger sec = [comps second];
-    NSString *dataString = [NSString stringWithFormat:@"%ld%ld%ld%ld%ld",year,month,day,hour,min];
+    NSString *dataString = [NSString stringWithFormat:@"%ld%ld%ld%ld%ld%ld%ld",year,month,week,day,hour,min,sec];
     return dataString;
 }
 @end

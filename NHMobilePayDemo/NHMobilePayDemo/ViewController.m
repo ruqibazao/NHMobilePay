@@ -14,9 +14,10 @@
 #define CNLiveUserAppID         @"118_itdr6ijv09"
 #define CNLiveUserAppKey        @"24557a1060598e010749ec11b43ac9d62e8a765d3463cf"
 
-@interface ViewController ()
+@interface ViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, copy  ) NSArray  *proudctIDS;
 @property (nonatomic, strong) NSString *coustomTransactionID;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -49,17 +50,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     // Do any additional setup after loading the view, typically from a nib.
 }
 
-
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    __weak __typeof(self)weakself = self;
     [NHIAP requestProducts:self.proudctIDS success:^(NSArray *products, NSArray *invalidIdentifiers) {
+        weakself.proudctIDS = products.copy;
+        [weakself.tableView reloadData];
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-          NSLog(@"查询成功:%@--%@",products,invalidIdentifiers);
+        NSLog(@"查询成功:%@--%@",products,invalidIdentifiers);
     } failure:^(NSError *error) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         if (error) {
@@ -67,8 +70,26 @@
             NSLog(@"查询失败:%@",error);
         }
     }];
-//    [NHIAP checkUnfinishedOrder];
 }
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.proudctIDS.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    SKProduct *product = _proudctIDS[indexPath.row];
+    cell.textLabel.text = product.productIdentifier;
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    
+}
+
 
 
 - (IBAction)buyEvent:(UIButton *)sender {

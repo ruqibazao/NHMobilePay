@@ -11,8 +11,8 @@
 #import <CommonCrypto/CommonDigest.h>
 
 
-#define PayURL_payed              @""
-#define PayURL_prepay             @""
+#define PayURL_payed              @"https://api.cnlive.com/open/api2/unifypay/payed"
+#define PayURL_prepay             @"https://api.cnlive.com/open/api2/unifypay/prepay"
 #define Sandbox_IAPURL            @"https://sandbox.itunes.apple.com/verifyReceipt" //applePay 沙盒环境
 #define Production_IAPURL         @"https://buy.itunes.apple.com/verifyReceipt" //applePay 正式环境
 
