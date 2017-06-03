@@ -9,11 +9,16 @@
 #import <Foundation/Foundation.h>
 #import "NHPayHelper.h"
 #import <StoreKit/StoreKit.h>
+
 #import "NHOrderManage.h"
+
+
+UIKIT_EXTERN  NSString *const NHIAPcompleteRecharge;
 
 typedef void (^NHSKPaymentTransactionFailureBlock)(SKPaymentTransaction *transaction, NSError *error);
 typedef void (^NHSKPaymentTransactionDidReceiveResponse)(SKProductsResponse *response);
-typedef void (^NHSKPaymentTransactionSuccessBlock)(SKPaymentTransaction *transaction);
+typedef void (^NHSKPaymentTransactionSuccessBlock)(SKPaymentTransaction *transaction, NSDictionary *resultObject);
+typedef void (^NHSKPaymentCompleteBlock)(SKPaymentTransaction *transaction);
 typedef void (^NHSKProductsRequestFailureBlock)(NSError *error);
 typedef void (^NHSKProductsRequestSuccessBlock)(NSArray <SKProduct *> *products, NSArray <NSString *> *invalidIdentifiers);
 typedef void (^NHStoreFailureBlock)(NSError *error);
@@ -26,6 +31,8 @@ typedef void (^NHStoreSuccessBlock)();
 
 @interface NHIAP : NHPayHelper
 @property (nonatomic, assign)id<NHIAPDelegate> delegate;
+//是否正在请求商品信息
+@property (nonatomic, assign) BOOL isRequestProudct;
 
 /**
  *  当前请求/正在购买的产品
@@ -51,6 +58,7 @@ NSSingletonH(NHIAP)
  */
 - (instancetype)addPayment:(NSString*)productIdentifier
                payObjectID:(NSString *)payObjectID
+           paymentComplete:(NHSKPaymentCompleteBlock)paymentComplete
                    success:(NHSKPaymentTransactionSuccessBlock)successBlock
                    failure:(NHSKPaymentTransactionFailureBlock)failureBlock;
 
@@ -64,6 +72,6 @@ NSSingletonH(NHIAP)
  *  如用户在支付完后，但还未向自己的服务成功通知时，出现的一系列异常(断网，断电...)
  *  @return 所有未完成的订单信息
  */
-+ (NSArray <NHOrderInfo *>*)checkUnfinishedOrder;
+- (NSArray <NHOrderInfo *>*)checkAllUnfinishedOrder;
 
 @end

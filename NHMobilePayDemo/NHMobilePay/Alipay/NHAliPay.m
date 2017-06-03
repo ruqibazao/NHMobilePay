@@ -31,7 +31,7 @@
     Order* order = [Order new];
     
     // NOTE: app_id设置
-    order.app_id = appID;
+    order.app_id = @"appID";
     
     // NOTE: 支付接口名称
     order.method = @"alipay.trade.app.pay";
@@ -54,7 +54,7 @@
     order.biz_content = [BizContent new];
     order.biz_content.body = @"我是测试数据";
     order.biz_content.subject = @"1";
-    order.biz_content.out_trade_no = [self generateTradeNO]; //订单ID（由商家自行制定）
+//    order.biz_content.out_trade_no = [self generateTradeNO]; //订单ID（由商家自行制定）
     order.biz_content.timeout_express = @"30m"; //超时时间设置
     order.biz_content.total_amount = [NSString stringWithFormat:@"%.2f", 0.01]; //商品价格
     
@@ -65,8 +65,9 @@
     
     // NOTE: 获取私钥并将商户信息签名，外部商户的加签过程请务必放在服务端，防止公私钥数据泄露；
     //       需要遵循RSA签名规范，并将签名字符串base64编码和UrlEncode
-    id<DataSigner> signer = CreateRSADataSigner(privateKey);
-    NSString *signedString = [signer signString:orderInfo];
+//    id<DataSigner> signer = CreateRSADataSigner(privateKey);
+//    NSString *signedString = [signer signString:orderInfo];
+    NSString *signedString;
     
     // NOTE: 如果加签成功，则继续执行支付
     if (signedString != nil) {

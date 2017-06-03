@@ -96,71 +96,24 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     __weak __typeof(self)weakself = self;
     
-    NHIAP *iap = [[NHIAP sharedNHIAP] addPayment:self.proudctIDS[sender.tag -1] payObjectID:@"698" success:^(SKPaymentTransaction *transaction) {
-        
-        NSDictionary *parameter =@{
-                                   @"sp_id":CNLiveUserAppID,
-                                   @"appId":CNLiveUserAppID,
-                                   @"out_trade_no":weakself.coustomTransactionID,
-                                   @"type":@"1001"
-                                   };
-        NSString *sigSting = [NSString stringWithFormat:@"%@&key=%@",[NHPayApi signvalue:parameter],CNLiveUserAppKey];
-        NSString *shaString = [[NHPayApi sha1:sigSting] uppercaseString];
-        NSMutableDictionary *parameter_sig = parameter.mutableCopy;
-        [parameter_sig setObject:shaString forKey:@"sign"];
-        
-        [NHPayApi apiRequestMeLive:parameter_sig urlString:@"payed" complete:^(id resultObject, NSError *error) {
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-            if (!error) {
-                [NHOrderManage deleteTransactionIdentifier:transaction.transactionIdentifier];
-            }
-            NSLog(@"购买成功：\n订单号：%@  \nbody:%@   \nerror:%@",transaction.transactionIdentifier,resultObject,error);
-        }];
-        
-    } failure:^(SKPaymentTransaction *transaction, NSError *error) {
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-        if (error) {
-            NSLog(@"购买错误：订单号：%@--error:%@",transaction.transactionIdentifier,error.localizedDescription);
-        }
-    }];
-    [self sendinfoToMeServe:iap.currentProduct.productIdentifier price:[iap.currentProduct.price intValue]];
-}
-
-- (void)sendinfoToMeServe:(NSString *)identifier price:(int)price{
-    if (identifier == nil) {
-        return;
-    }
-    _coustomTransactionID = [NSString stringWithFormat:@"%@-%@",[NHPayApi getCurrentDateBaseStyle:nil],identifier];
-    NSDictionary *parameter = @{
-                                @"sp_id":@"118_itdr6ijv09",
-                                @"appId":@"118_itdr6ijv09",
-                                @"out_trade_no":_coustomTransactionID,
-                                @"total_fee":[NSString stringWithFormat:@"%d",price*100],
-                                @"notify_url":@"http://apps.pay.cnlive.com/upappnotify/notify/updateCnCoin",
-                                @"type":@"1001",
-                                @"attach.value":[NSString stringWithFormat:@"%d",price],
-                                @"attach.prdId":@"chinacoin",
-                                @"user_id":@"698",
-                                @"attach.sid":@"698",
-                                @"frmId":@"apple",
-                                @"attach.plat":@"i",
-                                @"attach.payChannelId": @"4300",
-                                @"body":@"中国币"
-                                };
-    NSString *signParameterStr = [NSString stringWithFormat:@"%@&key=%@",[NHPayApi signvalue:parameter], CNLiveUserAppKey];
-    NSString *shaParameterStr = [[NHPayApi sha1:signParameterStr] uppercaseString];
+    [[NHIAP sharedNHIAP] addPayment:self.proudctIDS[sender.tag -1]
+                        payObjectID:@""
+                    paymentComplete:^(SKPaymentTransaction *transaction) {
+                        //苹果支付成功后，但还未验证完成
+                        // do something
+                        
+                    } success:^(SKPaymentTransaction *transaction, NSDictionary *resultObject) {
+                        //苹果支付成功后，并验证完成
+                        tipWithMessage(@"充值成功！");
+                        
+                    } failure:^(SKPaymentTransaction *transaction, NSError *error) {
+                        //购买失败
+                        if (error) {
+                            NSLog(@"购买错误：订单号：%@--error:%@",transaction.transactionIdentifier,error.localizedDescription);
+                        }
+                    }];
     
-    NSMutableDictionary *parameter_sig = parameter.mutableCopy;
-    [parameter_sig setObject:shaParameterStr forKey:@"sign"];
-    
-    [NHPayApi apiRequestMeLive:parameter_sig urlString:@"prepay" complete:^(id resultObject, NSError *error) {
-        NSLog(@"%@   \n%@",resultObject,error);
-        
-    }];
 }
-
-
-
 
 
 @end

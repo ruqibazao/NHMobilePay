@@ -18,9 +18,9 @@
 
 @implementation NHPayApi
 //去苹果服务器验证
-+ (void)IAPVerifyIsProductEnvironment:(BOOL)isProductEnvironment
-                            receiptStr:(NSString *)receiptStr
-                              complete:(ResultBlock)complete {
++ (void)IAPVerifyIsSandboxEnvironment:(BOOL)isSandboxEnvironment
+                           receiptStr:(NSString *)receiptStr
+                             complete:(ResultBlock)complete {
 
     // Create the JSON object that describes the request
     NSError *error = nil;
@@ -31,9 +31,9 @@
                                                           options:0
                                                             error:&error];
     
-    NSString *iapUrl = Production_IAPURL;
-    if (!isProductEnvironment) {
-        iapUrl = Sandbox_IAPURL;
+    NSString *iapUrl = Sandbox_IAPURL;
+    if (!isSandboxEnvironment) {
+        iapUrl = Production_IAPURL;
     }
     
     // Create a POST request with the receipt data.
@@ -51,7 +51,10 @@
      {
          dispatch_async(dispatch_get_main_queue(), ^{
              NSError *error2;
-             NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error2];
+             NSDictionary *jsonResponse;
+             if (data) {
+                 jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error2];
+             }
              if (complete) {
                  complete(jsonResponse,error);
              }
@@ -60,15 +63,62 @@
 }
 
 
-+ (void)apiRequestMeLive:(NSDictionary *)parameter urlString:(NSString *)urlString complete:(ResultBlock)complete {
+/** 通知自己的服务器验证*/
++ (void)payVerifyWithReceiptData:(NSString *)receiptData
+                  transaction_id:(NSString *)transaction_id
+                        totalFee:(NSString *)totalFee
+                          userID:(NSString *)userID
+                         is_test:(int)is_test
+                        complete:(NHPayCompleteBlock)complete {
+    NSString *requstUrl;
+    if (is_test == 1) {
+        requstUrl = @"http://xxxx.abc.com:9283/apple_pay";
+    }else{
+        requstUrl = @"http://oooo.abc.com:9283/apple_pay";
+    }
+    
+    NSDictionary *parameters = @{
+                                 @"receipt":receiptData,
+                                 @"userid":userID,
+                                 @"total_fee":totalFee,
+                                 @"transaction_id":@([transaction_id longLongValue]),
+                                 @"is_test":@(is_test),
+                                 @"currencyType":@(1)
+                                 };
+    NSLog(@"\n验证参数：%@-%@-%@-%d",userID,totalFee,transaction_id,is_test);
+    NSObject *object = [parameters objectForKey:@"userid"];
+    if (object == nil) {
+        NSAssert(object != nil, @"参数错误");
+        return;
+    }
+    
+    //网络请求请求....
+}
+
+//向蜜家服务器发送支付信息
++ (void)sendinfoToMeServePrice:(NSString *)price
+                 transactionID:(NSString *)transactionID
+                        userID:(NSString *)userID
+                       isPayed:(BOOL)isPayed
+                      complete:(ResultBlock)complete {
+    
     NSURLSessionConfiguration* sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:nil delegateQueue:nil];
+    NSString *urlStr = PayURL_prepay;
+    NSDictionary *parameter = [self prepayInfoPrice:[price intValue] transactionID:transactionID userID:userID];;
+    if (isPayed) {
+        urlStr = PayURL_payed;
+        parameter = [self payedInfoTransactionId:transactionID];
+    }
     
-    /* Create session, and optionally set a NSURLSessionDelegate. */
-    NSURLSession* session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:nil delegateQueue:nil];
     
-    NSString *urlStr = [urlString isEqualToString:@"prepay"] ? PayURL_prepay : PayURL_payed;
-    NSURL *URL = [NSURL URLWithString:urlStr];
-    URL = NSURLByAppendingQueryParameters(URL, parameter);
+    NSString *signParameterStr = [NSString stringWithFormat:@"%@&key=%@",[NHPayApi signvalue:parameter], @""];
+    NSString *shaParameterStr = [[NHPayApi sha1:signParameterStr] uppercaseString];
+    NSMutableDictionary *parameter_sig = parameter.mutableCopy;
+    [parameter_sig setObject:shaParameterStr forKey:@"sign"];
+    
+    NSURL *URL = [NSURL URLWithString:isPayed ? PayURL_payed : PayURL_prepay];
+    URL = NSURLByAppendingQueryParameters(URL, parameter_sig);
     
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:URL];
     request.HTTPMethod = @"POST";
@@ -79,11 +129,10 @@
         if (error == nil) {
             // Success
             jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            //            NSLog(@"cnlive:\n%@ \nerror:%@",jsonResponse,error);
+            NSLog(@"URL Session Task Succeeded: HTTP %ld", (long)((NSHTTPURLResponse*)response).statusCode);
             
-//            NSLog(@"cnlive:\n%@ \nerror:%@",jsonResponse,error);
-            NSLog(@"URL Session Task Succeeded: HTTP %ld", ((NSHTTPURLResponse*)response).statusCode);
-        }
-        else {
+        } else {
             // Failure
             NSLog(@"URL Session Task Failed: %@", [error localizedDescription]);
         }
@@ -93,6 +142,40 @@
     }];
     [task resume];
     [session finishTasksAndInvalidate];
+}
+
+//MATK:请求参数拼接
+//准备支付的参数
++ (NSDictionary *)prepayInfoPrice:(int)price transactionID:(NSString *)transactionID userID:(NSString *)userID{
+    NSDictionary *parameter = @{
+                                @"sp_id":@"118_itdr6ijv09",
+                                @"appId":@"118_itdr6ijv09",
+                                @"out_trade_no":transactionID ?: [self getCurrentDateBaseStyle:nil],
+                                @"total_fee":[NSString stringWithFormat:@"%d",price *100],
+                                @"notify_url":@"http://apps.pay.cnlive.com/upappnotify/notify/updateCnCoin",
+                                @"type":@"1001",
+                                @"attach.value":[NSString stringWithFormat:@"%d",price],
+                                @"attach.prdId":@"chinacoin",
+                                @"user_id":userID,
+                                @"attach.sid":userID,
+                                @"frmId":@"apple",
+                                @"attach.plat":@"i",
+                                @"attach.payChannelId": @"4300",
+                                @"body":@"中国币"
+                                };
+    
+    return parameter;
+}
+
+//支付完成的参数
++ (NSDictionary *)payedInfoTransactionId:(NSString *)transactionIdentifier{
+    NSDictionary *parameter = @{
+                                @"appId":@"",
+                                @"out_trade_no":transactionIdentifier ?: [self getCurrentDateBaseStyle:nil] ,
+                                @"type":@"1001"
+                                };
+    
+    return parameter;
 }
 
 

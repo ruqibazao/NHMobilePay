@@ -8,22 +8,26 @@
 
 #import "NHOrderManage.h"
 #import <CommonCrypto/CommonDigest.h>
+#import <StoreKit/StoreKit.h>
+#import "NHPayApi.h"
+#import "NHPaymentVerify.h"
+#import "NHPayHelper.h"
 
 
 //获取沙盒 Library
 #define NHPathLibrary   [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) firstObject]
 #define TranscationInfo @"noitcasnartinfo.db"
 
-NSString * const MCDownloadCacheFolderName = @"om";
+NSString * const NHCacheFolderName = @"om";
 
-static NSString * cacheFolder() {
+static NSString * libraryFolder() {
     NSFileManager *filemgr = [NSFileManager defaultManager];
     static NSString *cacheFolder;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         if (!cacheFolder) {
             NSString *cacheDir = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,NSUserDomainMask,YES).firstObject;
-            cacheFolder = [cacheDir stringByAppendingPathComponent:MCDownloadCacheFolderName];
+            cacheFolder = [cacheDir stringByAppendingPathComponent:NHCacheFolderName];
         }
         NSError *error = nil;
         if(![filemgr createDirectoryAtPath:cacheFolder withIntermediateDirectories:YES attributes:nil error:&error]) {
@@ -41,7 +45,7 @@ static NSString * LocalOrderCachePath(NSString *fileName, BOOL suffix){
     if (suffix) {
         name = [NSString stringWithFormat:@"%@.db",fileName];
     }
-    return [cacheFolder() stringByAppendingPathComponent:name];
+    return [libraryFolder() stringByAppendingPathComponent:name];
 }
 
 static NSString * getMD5String(NSString *str) {
@@ -65,7 +69,11 @@ static NSString * getMD5String(NSString *str) {
 @property (nonatomic, copy) NSString *proudctPrice; //产品价格
 @property (nonatomic, copy) NSString *payObjectID; //支付者id
 @property (nonatomic, copy) NSString *payTimeStamp; //支付时间(这里以时间戳格式保存)
+@property (nonatomic, copy) NSString *proudctID; //产品ID
+@property (nonatomic, copy) NSNumber *sandbox; //交易环境(1为沙盒 0线上)
 @end
+
+
 @implementation NHOrderInfo
 
 #define ReceiptData           @"receiptDataStr"
@@ -73,11 +81,15 @@ static NSString * getMD5String(NSString *str) {
 #define ProudctPrice          @"proudctPrice"
 #define PayObjectID           @"payObjectID"
 #define PayTimeStamp          @"payTimeStamp"
+#define ProudctID             @"proudctID"
+#define Sandbox               @"sandbox"
 
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     [aCoder encodeObject:_receiptDataStr forKey:getMD5String(ReceiptData)];
     [aCoder encodeObject:_transactionIdentifier forKey:getMD5String(TransactionIdentifier)];
     [aCoder encodeObject:_proudctPrice forKey:getMD5String(ProudctPrice)];
+    [aCoder encodeObject:_proudctID forKey:getMD5String(ProudctID)];
+    [aCoder encodeObject:_sandbox forKey:getMD5String(Sandbox)];
     [aCoder encodeObject:_payObjectID forKey:getMD5String(PayObjectID)];
     [aCoder encodeObject:_payTimeStamp forKey:getMD5String([NSString stringWithFormat:@"%@",PayTimeStamp])];
 }
@@ -87,9 +99,11 @@ static NSString * getMD5String(NSString *str) {
     self = [super init];
     if (self) {
         self.receiptDataStr        = [coder decodeObjectForKey:getMD5String(ReceiptData)];
-        self.transactionIdentifier = [coder decodeObjectForKey:getMD5String(TransactionIdentifier)];
         self.proudctPrice          = [coder decodeObjectForKey:getMD5String(ProudctPrice)];
         self.payObjectID           = [coder decodeObjectForKey:getMD5String(PayObjectID)];
+        self.proudctID             = [coder decodeObjectForKey:getMD5String(ProudctID)];
+        self.sandbox               = [coder decodeObjectForKey:getMD5String(Sandbox)];
+        self.transactionIdentifier = [coder decodeObjectForKey:getMD5String(TransactionIdentifier)];
         self.payTimeStamp = [coder decodeObjectForKey:getMD5String([NSString stringWithFormat:@"%@",PayTimeStamp])];
     }
     return self;
@@ -104,6 +118,26 @@ static NSString * getMD5String(NSString *str) {
 
 @implementation NHOrderManage
 
+/**
++ (void)addPayingProductID:(NSString *)productID
+               payObjectID:(NSString *)payObjectID
+              proudctPrice:(NSString *)proudctPrice {
+    NHOrderInfo *orderinfo = [[NHOrderInfo alloc] init];
+    orderinfo.transactionIdentifier = productID;
+    orderinfo.receiptDataStr = @"";
+    orderinfo.proudctPrice = proudctPrice;
+    orderinfo.payObjectID = payObjectID;
+    orderinfo.payTimeStamp = [self getCurrentDateBaseStyleWithData:nil];
+    
+    [self saveOrderInfo:orderinfo fileName:payObjectID];
+}
+
+
++ (void)deletePayingProductID:(NSString *)productID {
+    [self deleteTransactionIdentifier:productID];
+}
+*/
+
 + (BOOL)saveOrderInfo:(NHOrderInfo *)orderinfo fileName:(NSString *)fileName{
     return [NSKeyedArchiver archiveRootObject:orderinfo toFile:LocalOrderCachePath(fileName,YES)];
 }
@@ -112,17 +146,24 @@ static NSString * getMD5String(NSString *str) {
 + (BOOL)addTransactionIdentifier:(NSString *)transactionIdentifier
                   receiptDataStr:(NSString *)receiptDataStr
                     proudctPrice:(NSString *)proudctPrice
-                     payObjectID:(NSString *)payObjectID {
-
-    NHOrderInfo *orderinfo = [[NHOrderInfo alloc] init];
-    orderinfo.transactionIdentifier = transactionIdentifier;
-    orderinfo.receiptDataStr = receiptDataStr;
-    orderinfo.proudctPrice = proudctPrice;
-    orderinfo.payObjectID = payObjectID;
-    orderinfo.payTimeStamp = [self getCurrentDateBaseStyleWithData:nil];
-    NSLog(@"保存订单:\n%@,\n%@,\n%@,\n%@,\n%@",orderinfo.transactionIdentifier,orderinfo.receiptDataStr,orderinfo.proudctPrice,orderinfo.payObjectID,orderinfo.payTimeStamp);
-
-   return [self saveOrderInfo:orderinfo fileName:transactionIdentifier];
+                       proudctID:(NSString *)proudctID
+                     payObjectID:(NSString *)payObjectID
+                         sandbox:(BOOL)sandbox {
+    
+    if (transactionIdentifier && payObjectID && receiptDataStr) {
+        NHOrderInfo *orderinfo = [[NHOrderInfo alloc] init];
+        orderinfo.payObjectID = payObjectID;
+        orderinfo.proudctPrice = proudctPrice;
+        orderinfo.receiptDataStr = receiptDataStr;
+        orderinfo.payTimeStamp = [self getCurrentDateBaseStyleWithData:nil];
+        orderinfo.transactionIdentifier = transactionIdentifier;
+        orderinfo.proudctID = proudctID;
+        orderinfo.sandbox = [NSNumber numberWithBool:sandbox];
+        NSLog(@"保存订单:\n%@,\n%ld,\n%@,\n%@,\n%@",orderinfo.transactionIdentifier,orderinfo.receiptDataStr.length,orderinfo.proudctPrice,orderinfo.payObjectID,orderinfo.payTimeStamp);
+        
+        return [self saveOrderInfo:orderinfo fileName:transactionIdentifier];
+    }
+    return NO;
 }
 
 
@@ -134,7 +175,7 @@ static NSString * getMD5String(NSString *str) {
     if (isExists) {
         NSError *error;
         [fileManager removeItemAtPath:LocalOrderCachePath(transactionIdentifier,YES) error:&error];
-        NSLog(@"删除订单：\n%@,\n%@,\n%@,\n%@,\n%@",orderinfo.transactionIdentifier,orderinfo.receiptDataStr,orderinfo.proudctPrice,orderinfo.payObjectID,orderinfo.payTimeStamp);
+        NSLog(@"删除订单：\n%@,\n%ld,\n%@,\n%@,\n%@",orderinfo.transactionIdentifier,orderinfo.receiptDataStr.length,orderinfo.proudctPrice,orderinfo.payObjectID,orderinfo.payTimeStamp);
         if (error) {
             NSLog(@"\n订单删除失败:%@",error.localizedDescription);
         }
@@ -142,24 +183,75 @@ static NSString * getMD5String(NSString *str) {
     return isExists;
 }
 
++ (NHOrderInfo *)checkUnderwayingUnfinishedOrder:(NSString *)productID {
+    NHOrderInfo *orderinfo;
+    for (NSString *name in [self getFiles]) {
+        kNSLog(@"checkUnderwayingOrder: %@",name);
+        if ([name hasPrefix:productID]) {
+            orderinfo = [NSKeyedUnarchiver unarchiveObjectWithFile:LocalOrderCachePath(name,NO)];
+        }
+    }
+    return orderinfo;
+}
 
-+ (NSArray<NHOrderInfo *> *)checkUnfinishedOrder{
+
+
++ (NSArray<NHOrderInfo *> *)checkHistyUnfinishedOrder{
     NSError *error;
-    NSString *filePath = cacheFolder();
+    NSString *filePath = libraryFolder();
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSArray *files = [fileManager subpathsOfDirectoryAtPath:filePath error:&error];
     NSMutableArray *orders = [[NSMutableArray alloc] init];
-    
     for (NSString *name in files) {
         @autoreleasepool {
-            NHOrderInfo *orderinfo = [NSKeyedUnarchiver unarchiveObjectWithFile:LocalOrderCachePath(name,NO)];
+            __block NHOrderInfo *orderinfo = [NSKeyedUnarchiver unarchiveObjectWithFile:LocalOrderCachePath(name,NO)];
+            //说明是还未完成支付的订单
+            if (orderinfo.receiptDataStr.length < 2) continue;
+            
             [orders addObject:orderinfo];
-            NSLog(@"检查订单:\n%@,\n%@,\n%@,\n%@,\n%@",orderinfo.transactionIdentifier,orderinfo.receiptDataStr,orderinfo.proudctPrice,orderinfo.payObjectID,orderinfo.payTimeStamp);
+            kNSLog(@"检查订单:\n%@,\n%lu,\n%@,\n%@,\n%@",orderinfo.transactionIdentifier,orderinfo.receiptDataStr.length,
+                  orderinfo.proudctPrice,orderinfo.payObjectID,orderinfo.payTimeStamp);
+            
+            //通知百科服务器验证
+            [NHPaymentVerify verifyPaymentResultWithNHOrderInfo:orderinfo];
+            
+//            [BKUserCenter userApplePayWithReceiptData:orderinfo.receiptDataStr
+//                                       transaction_id:orderinfo.transactionIdentifier
+//                                             totalFee:@([orderinfo.proudctPrice integerValue])
+//                                               userID:orderinfo.payObjectID
+//                                              is_test:0
+//                                             complete:^(id responseObject, NSError *error)
+//             {
+//                 NSLog(@"\n恢复购买>>百科服务器:%@",responseObject);
+//                 if (!error && ([[responseObject objectForKey:@"err"] intValue] == 0)) {
+//                     [NHOrderManage deleteTransactionIdentifier:orderinfo.transactionIdentifier];
+//                    #if DEBUG
+//                     dispatch_async(dispatch_get_main_queue(), ^{
+//                         [MBProgressHUD showSuccess:@"恢复充值成功" ToView:kWindow];
+//                     });
+//                    #endif
+//                     
+//                 } else {
+//                     dispatch_async(dispatch_get_main_queue(), ^{
+//                        #if DEBUG
+//                         [MBProgressHUD showSuccess:[NSString stringWithFormat:@"恢复充值失败,%@",error.localizedDescription] ToView:kWindow];
+//                        #endif
+//                     });
+//                 }
+//             }];
         }
     }
     return orders;
 }
 
+
++ (NSArray *)getFiles {
+    NSError *error;
+    NSString *filePath = libraryFolder();
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *files = [fileManager subpathsOfDirectoryAtPath:filePath error:&error];
+    return files;
+}
 
 + (NHOrderInfo *)getOrderInfoTransactionIdentifier:(NSString *)transactionIdentifier {
     NHOrderInfo *orderinfo = [NSKeyedUnarchiver unarchiveObjectWithFile:LocalOrderCachePath(transactionIdentifier,YES)];
@@ -189,7 +281,7 @@ static NSString * getMD5String(NSString *str) {
     NSInteger hour = [comps hour];
     NSInteger min = [comps minute];
     NSInteger sec = [comps second];
-    NSString *dataString = [NSString stringWithFormat:@"%ld%ld%ld%ld%ld%ld%ld",year,month,week,day,hour,min,sec];
+    NSString *dataString = [NSString stringWithFormat:@"%ld%ld%ld%ld%ld",year,month,day,hour,min];
     return dataString;
 }
 @end

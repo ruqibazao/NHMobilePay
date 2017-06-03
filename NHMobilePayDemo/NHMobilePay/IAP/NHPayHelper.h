@@ -12,6 +12,18 @@
 #import "NHPayApi.h"
 #import "NHOrderManage.h"
 
+///*****************************自定义的 NSLog******************************/
+#ifdef DEBUG
+#define kNSLog(fmt, ...) NSLog((@"%s -- " fmt), __PRETTY_FUNCTION__, ##__VA_ARGS__);
+#else
+#define kNSLog(...)
+#endif
+
+#define ERROR_INFO(Description,FailureReason,RecoverySuggestion)  [NSDictionary dictionaryWithObjectsAndKeys:(Description),NSLocalizedDescriptionKey,\
+(FailureReason),NSLocalizedFailureReasonErrorKey,\
+(RecoverySuggestion),NSLocalizedRecoverySuggestionErrorKey, nil]
+#define ERROR_MSG(statusCode,info)  [[NSError alloc] initWithDomain:NSCocoaErrorDomain code:(statusCode) userInfo:(info)]
+
 //自定提醒窗口
 NS_INLINE void tipWithMessage(NSString *message){
     
@@ -50,8 +62,8 @@ typedef NS_ENUM(NSInteger,PayResultType){
     PayType_Result_OrderDeal = 6,       //订单交易中
 };
 
-typedef void (^PayCompleteBlock)(id result, NSString *transactionIdentifier, NSError *error);
+typedef void (^NHPayCompleteBlock)(id result, NSString *transactionIdentifier, NSError *error);
 
 @interface NHPayHelper : NSObject
-@property (nonatomic, copy) PayCompleteBlock completeBlock;
+@property (nonatomic, copy) NHPayCompleteBlock completeBlock;
 @end
